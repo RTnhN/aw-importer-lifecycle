@@ -7,7 +7,7 @@ license = "MPL-2.0"
 repository = "https://github.com/RTnhN/aw-watcher-lifecycle"
 
 [tool.poetry.scripts]
-aw-watcher-toggl = "aw_watcher_lifecycle:main"
+aw-watcher-lifecycle = "aw_watcher_lifecycle:main"
 
 [tool.poetry.dependencies]
 python = "^3.7"
