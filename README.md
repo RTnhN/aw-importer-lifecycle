@@ -1,7 +1,7 @@
 aw-watcher-lifecycle
 ==================
 
-This extension imports data from lifecycle by watching a folder for changes.
+This extension imports data from [lifecycle](https://apps.apple.com/us/app/life-cycle-track-your-time/id1064955217) by watching a folder for changes.
 
 This watcher is currently in a early stage of development, please submit PRs if you find bugs!
 
