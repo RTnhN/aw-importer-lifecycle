@@ -5,6 +5,7 @@ from pathlib import Path
 import logging
 import csv
 from time import sleep
+from datetime import datetime
 
 from aw_core import dirs
 from aw_core.models import Event
@@ -35,7 +36,7 @@ def parse_and_add_data(aw, bucket_name, path):
             timestamp, duration, name, location = row[0].strip(), row[4].strip(), row[5].strip(), row[6].strip()
             title = f"{name} @ {location}" if location else name
             id = timestamp + duration + name + location
-
+            timestamp = datetime.strptime(timestamp, '%m/%d/%Y %H:%M').isoformat()
             if id not in already_logged_events:
                 data = {"title": title, "name": name, "location": location, "uid": id}
                 new_event = Event(timestamp=timestamp, duration=int(duration), data=data)
