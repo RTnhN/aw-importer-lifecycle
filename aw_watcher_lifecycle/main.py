@@ -83,7 +83,7 @@ def main():
 
     while True:
         data_path = Path(data_path)
-        files = list(data_path.glob("*"))
+        files = list(data_path.glob("*.csv"))
         unimported_files = [file for file in files if not file.stem.endswith("_imported")]
 
         for unimported_file in unimported_files:
