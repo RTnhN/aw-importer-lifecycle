@@ -31,23 +31,27 @@ def parse_and_add_data(aw, bucket_name, path):
         reader = csv.reader(f)
         next(reader)  # Skip header
         next(reader)  # Skip blank row
-
         for row in reader:
-            timestamp, duration, name, location = row[0].strip(), row[4].strip(), row[5].strip(), row[6].strip()
-            title = f"{name} @ {location}" if location else name
-            id = timestamp + duration + name + location
-            timestamp = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S').isoformat()
-            if id not in already_logged_events:
-                data = {"title": title, "name": name, "location": location, "uid": id}
-                new_event = Event(timestamp=timestamp, duration=int(duration), data=data)
-                batch_events.append(new_event)
-                added_logs += 1
+            try:
+                timestamp, duration, name, location = row[0].strip(), row[4].strip(), row[5].strip(), row[6].strip()
+                title = f"{name} @ {location}" if location else name
+                id = timestamp + duration + name + location
+                timestamp = datetime.strptime(timestamp, '%m/%d/%Y %H:%M').isoformat()
+                if id not in already_logged_events:
+                    data = {"title": title, "name": name, "location": location, "uid": id}
+                    new_event = Event(timestamp=timestamp, duration=int(duration), data=data)
+                    batch_events.append(new_event)
+                    added_logs += 1
+            except Exception:
+                print(f"There was a problem with the following row: {row}")
+                continue
+
 
         # Batch insert if supported
         if batch_events:
             aw.insert_events(bucket_name, batch_events)
 
-        print_statusline(f"Added {added_logs} task(s)")
+        print_statusline(f"Added {added_logs} items(s)")
 
 def load_config():
     from aw_core.config import load_config_toml as _load_config
