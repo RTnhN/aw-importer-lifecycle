@@ -36,7 +36,7 @@ def parse_and_add_data(aw, bucket_name, path):
                 timestamp, duration, name, location = row[0].strip(), row[4].strip(), row[5].strip(), row[6].strip()
                 title = f"{name} @ {location}" if location else name
                 id = timestamp + duration + name + location
-                timestamp = datetime.strptime(timestamp, '%m/%d/%Y %H:%M').isoformat()
+                timestamp = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S').isoformat()
                 if id not in already_logged_events:
                     data = {"title": title, "name": name, "location": location, "uid": id}
                     new_event = Event(timestamp=timestamp, duration=int(duration), data=data)
