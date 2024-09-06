@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "aw-watcher-lifecycle"
+name = "aw-importer-lifecycle"
 version = "0.0.1"
-description = "Lifecycle watcher for ActivityWatch"
+description = "Lifecycle importer for ActivityWatch"
 authors = ["Zach Strout <zachstrout@gmail.com>"]
 license = "MPL-2.0"
-repository = "https://github.com/RTnhN/aw-watcher-lifecycle"
+repository = "https://github.com/RTnhN/aw-importer-lifecycle"
 
 [tool.poetry.scripts]
-aw-watcher-lifecycle = "aw_watcher_lifecycle:main"
+aw-importer-lifecycle = "aw_importer_lifecycle:main"
 
 [tool.poetry.dependencies]
 python = "^3.7"

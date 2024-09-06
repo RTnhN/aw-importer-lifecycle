@@ -11,7 +11,7 @@ from aw_core import dirs
 from aw_core.models import Event
 from aw_client.client import ActivityWatchClient
 
-WATCHER_NAME = "aw-watcher-lifecycle"
+WATCHER_NAME = "aw-importer-lifecycle"
 
 
 logger = logging.getLogger(WATCHER_NAME)
