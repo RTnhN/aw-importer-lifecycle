@@ -11,7 +11,7 @@ from aw_core import dirs
 from aw_core.models import Event
 from aw_client.client import ActivityWatchClient
 
-WATCHER_NAME = "aw-importer-lifecycle"
+WATCHER_NAME = "aw-watcher-lifecycle"
 
 
 logger = logging.getLogger(WATCHER_NAME)
@@ -84,7 +84,6 @@ def print_statusline(msg):
 
 
 def main():
-
     logging.basicConfig(level=logging.INFO)
 
     config_dir = dirs.get_config_dir(WATCHER_NAME)
@@ -95,9 +94,7 @@ def main():
     if not data_path:
         logger.warning(
             """You need to specify the folder that has the data files.
-                       You can find the config file here:: {}""".format(
-                config_dir
-            )
+                       You can find the config file here:: {}""".format(config_dir)
         )
         sys.exit(1)
 
@@ -118,8 +115,10 @@ def main():
         for unimported_file in unimported_files:
             file_path = data_path / unimported_file
             parse_and_add_data(aw, bucket_name, file_path)
+            timestamp_str = datetime.now().strftime("%Y-%m-%d_%H-%M")
+            imported_suffix = f"_{timestamp_str}_imported"
             file_path.rename(
-                data_path / Path(file_path.stem + "_imported" + file_path.suffix)
+                data_path / Path(file_path.stem + imported_suffix + file_path.suffix)
             )
         sleep(poll_time)
 
